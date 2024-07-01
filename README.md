@@ -24,9 +24,7 @@ public class Program {
         List<Animal> animals = new List<Animal> {
             new Dog(),
             new Cat()
-        };
-
-        foreach (var animal in animals) {
+        };foreach (var animal in animals) {
             animal.MakeSound();  // Saída: Woof! Meow!
         }
     }
