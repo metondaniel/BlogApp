@@ -11,11 +11,10 @@ using BlogApp.Domain.Models;
 using BlogApp;
 using BlogApp.Domain.Interfaces.Repositories;
 using BlogApp.Domain.Interfaces.Services;
-using BlogApp.Domain.Services;// Certifique-se de que este namespace está correto
+using BlogApp.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -23,11 +22,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
 });
 
-// Configure Entity Framework with SQL Server
 builder.Services.AddDbContext<BlogContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure Identity
 builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BlogContext>()
     .AddDefaultTokenProviders();
@@ -37,7 +34,6 @@ builder.Services.AddScoped<IPostService, PostService>();
 
 var app = builder.Build();
 
-// Ensure the database is created and seeded
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -46,7 +42,6 @@ using (var scope = app.Services.CreateScope())
     await DbInitializer.InitializeAsync(context, userManager);
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

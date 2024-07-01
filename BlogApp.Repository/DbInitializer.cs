@@ -14,13 +14,11 @@ namespace BlogApp.Repository
     {
         public static async Task InitializeAsync(BlogContext context, UserManager<User> userManager)
         {
-            // Ensure the database is created
             context.Database.Migrate();
 
-            // Look for any users.
             if (context.Users.Any())
             {
-                return;   // DB has been seeded
+                return;   
             }
             var users = new User[]
             {
