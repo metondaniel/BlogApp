@@ -1,7 +1,37 @@
 Respostas
 
 1.Herança múltipla é situação de herdar as características, métodos e propriedades de várias classes, com isso você consegue chamar propriedades ou métodos de outras estruturas, o c# não suporta herança de várias classes, mas apenas de várias interfaces que são contratos base sem implementação.
-O polimorfismo possibilita tratar o mesmo objeto de formas diferente, por exemplo, você pode criar uma classe abstrata com um método abstract, e fazer o override desse método em diferentes classes que herdam dessa classe abstract
+O polimorfismo possibilita tratar o mesmo objeto de formas diferente, por exemplo, você pode criar uma classe abstrata com um método abstract, e fazer o override desse método em diferentes classes que herdam dessa classe abstract, exemplo de poliforfismo
+
+public abstract class Animal {
+    public abstract void MakeSound();
+}
+
+public class Dog : Animal {
+    public override void MakeSound() {
+        Console.WriteLine("Woof!");
+    }
+}
+
+public class Cat : Animal {
+    public override void MakeSound() {
+        Console.WriteLine("Meow!");
+    }
+}
+
+public class Program {
+    public static void Main() {
+        List<Animal> animals = new List<Animal> {
+            new Dog(),
+            new Cat()
+        };
+
+        foreach (var animal in animals) {
+            animal.MakeSound();  // Saída: Woof! Meow!
+        }
+    }
+}
+
 
 
 2. O Solid são 5 princípios de programação que ajudam a escrever códigos mais organizados e fáceis de ler, algums exemplos são, o primeiro, Single responsability, que define que os objetos deve ter funcionalidades únicas e ter diversas funções na mesma estrutura, e o dependency inversion que utilizamos como injeção de dependência, evitando instanciar o objeto toda vez que queremos utiliza-los e a implementação se mantem nas abstrações 
